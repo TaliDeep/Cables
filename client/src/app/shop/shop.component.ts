@@ -13,6 +13,9 @@ export class ShopComponent implements OnInit {
   products: IProduct[] = [];
   brands: IBrand[] = [];
   types: IType[] = [];
+  brandIdSelected!: number;
+  typeIdSelected!: number;
+
   constructor(private shopService: ShopService) {}
 
   ngOnInit(): void {
@@ -22,9 +25,22 @@ export class ShopComponent implements OnInit {
   }
 
   getProducts() {
-    this.shopService.getProducts().subscribe(
+    this.shopService
+      .getProducts(this.brandIdSelected, this.typeIdSelected)
+      .subscribe(
+        (response) => {
+          this.products = response.data;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
+
+  getBrands() {
+    this.shopService.getBrands().subscribe(
       (response) => {
-        this.products = response.data;
+        this.brands = [{ id: 0, name: 'All' }, ...response];
       },
       (error) => {
         console.log(error);
@@ -32,19 +48,24 @@ export class ShopComponent implements OnInit {
     );
   }
 
-  getBrands(){
-    this.shopService.getBrands().subscribe(response =>{
-      this.brands = response;
-    }, error =>{
-      console.log(error);
-    });
+  getTypes() {
+    this.shopService.getTypes().subscribe(
+      (response) => {
+        this.types = [{ id: 0, name: 'All' }, ...response];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
-  getTypes(){
-    this.shopService.getTypes().subscribe(response =>{
-      this.types = response;
-    }, error =>{
-      console.log(error);
-    });
+  onBrandSelected(brandId: number) {
+    this.brandIdSelected = brandId;
+    this.getProducts();
+  }
+
+  onTypeSelected(typeId: number) {
+    this.typeIdSelected = typeId;
+    this.getProducts();
   }
 }
