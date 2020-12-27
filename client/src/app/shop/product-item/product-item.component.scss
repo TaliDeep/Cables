@@ -5,3 +5,11 @@
 .btn {
     width:50%
 }
+
+.img-fluid {
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+}
