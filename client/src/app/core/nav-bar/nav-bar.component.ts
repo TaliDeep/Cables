@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AccountService } from 'src/app/account/account.service';
 import { BasketService } from 'src/app/basket/basket.service';
 
 @Component({
@@ -8,12 +9,17 @@ import { BasketService } from 'src/app/basket/basket.service';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
-
   basket$!: Observable<any>;
-  constructor(private basketService: BasketService) { }
+  currentUser$!: Observable<any>;
+
+  constructor(private basketService: BasketService, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.basket$ = this.basketService.basket$;
+    this.currentUser$ = this.accountService.currentUser$;
   }
 
+  logout() {
+    this.accountService.logout();
+  }
 }
