@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { IDeliveryMethod } from '../shared/models/deliveryMethod';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import {IDeliveryMethod} from '../shared/models/deliveryMethod';
 import { IOrderToCreate } from '../shared/models/order';
 
 @Injectable({
