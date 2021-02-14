@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using API.Extensions;
 using API.Helpers;
@@ -38,12 +39,12 @@ namespace API
         public void ConfigureProductionServices(IServiceCollection services)
         {
             services.AddDbContext<StoreContext>(x =>
-                x.UseMySql(_config.GetConnectionString("DefaultConnection")));
+                x.UseMySql(_config.GetConnectionString("DefaultConnnection"), 
+                    new MySqlServerVersion(new Version(8, 0, 23))));
 
-            services.AddDbContext<AppIdentityDbContext>(x => 
-            {
-                x.UseMySql(_config.GetConnectionString("IdentityConnection"));
-            });
+            services.AddDbContext<AppIdentityDbContext>(x =>
+                x.UseMySql(_config.GetConnectionString("IdentityConnnection"), 
+                    new MySqlServerVersion(new Version(8, 0, 23))));
 
             ConfigureServices(services);
         }
