@@ -39,11 +39,11 @@ namespace API
         public void ConfigureProductionServices(IServiceCollection services)
         {
             services.AddDbContext<StoreContext>(x =>
-                x.UseMySql(_config.GetConnectionString("DefaultConnnection"), 
+                x.UseMySql(_config.GetConnectionString("DefaultConnection"), 
                     new MySqlServerVersion(new Version(8, 0, 23))));
 
             services.AddDbContext<AppIdentityDbContext>(x =>
-                x.UseMySql(_config.GetConnectionString("IdentityConnnection"), 
+                x.UseMySql(_config.GetConnectionString("IdentityConnection"), 
                     new MySqlServerVersion(new Version(8, 0, 23))));
 
             ConfigureServices(services);
