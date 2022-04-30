@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Data.Migrations
 {
@@ -12,12 +10,12 @@ namespace Infrastructure.Data.Migrations
                 name: "DeliveryMethods",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ShortName = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    DeliveryTime = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    Description = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ShortName = table.Column<string>(type: "TEXT", nullable: true),
+                    DeliveryTime = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Price = table.Column<double>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,9 +26,9 @@ namespace Infrastructure.Data.Migrations
                 name: "ProductBrands",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -41,9 +39,9 @@ namespace Infrastructure.Data.Migrations
                 name: "ProductTypes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -54,20 +52,20 @@ namespace Infrastructure.Data.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    BuyerEmail = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    OrderDate = table.Column<DateTimeOffset>(type: "datetime(6)", nullable: false),
-                    ShipToAddress_FirstName = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    ShipToAddress_LastName = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    ShipToAddress_Street = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    ShipToAddress_City = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    ShipToAddress_State = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    ShipToAddress_Zipcode = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    DeliveryMethodId = table.Column<int>(type: "int", nullable: true),
-                    Subtotal = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    Status = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: false),
-                    PaymentIntentId = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    BuyerEmail = table.Column<string>(type: "TEXT", nullable: true),
+                    OrderDate = table.Column<long>(type: "INTEGER", nullable: false),
+                    ShipToAddress_FirstName = table.Column<string>(type: "TEXT", nullable: true),
+                    ShipToAddress_LastName = table.Column<string>(type: "TEXT", nullable: true),
+                    ShipToAddress_Street = table.Column<string>(type: "TEXT", nullable: true),
+                    ShipToAddress_City = table.Column<string>(type: "TEXT", nullable: true),
+                    ShipToAddress_State = table.Column<string>(type: "TEXT", nullable: true),
+                    ShipToAddress_Zipcode = table.Column<string>(type: "TEXT", nullable: true),
+                    DeliveryMethodId = table.Column<int>(type: "INTEGER", nullable: true),
+                    Subtotal = table.Column<double>(type: "REAL", nullable: false),
+                    Status = table.Column<string>(type: "TEXT", nullable: false),
+                    PaymentIntentId = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -84,14 +82,14 @@ namespace Infrastructure.Data.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "varchar(100) CHARACTER SET utf8mb4", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PictureUrl = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: false),
-                    ProductTypeId = table.Column<int>(type: "int", nullable: false),
-                    ProductBrandId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Price = table.Column<double>(type: "decimal(18,2)", nullable: false),
+                    PictureUrl = table.Column<string>(type: "TEXT", nullable: false),
+                    ProductTypeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProductBrandId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -114,14 +112,14 @@ namespace Infrastructure.Data.Migrations
                 name: "OrderItems",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ItemOrdered_ProductItemId = table.Column<int>(type: "int", nullable: true),
-                    ItemOrdered_ProductName = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    ItemOrdered_PictureUrl = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ItemOrdered_ProductItemId = table.Column<int>(type: "INTEGER", nullable: true),
+                    ItemOrdered_ProductName = table.Column<string>(type: "TEXT", nullable: true),
+                    ItemOrdered_PictureUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    Price = table.Column<double>(type: "decimal(18,2)", nullable: false),
+                    Quantity = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrderId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
