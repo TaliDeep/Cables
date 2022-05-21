@@ -26,12 +26,12 @@ namespace API
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
             services.AddDbContext<StoreContext>(x =>
-                x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
+                x.UseMySql(_config.GetConnectionString("DefaultConnection"), 
+                    new MySqlServerVersion(new Version(8, 0, 23))));
 
             services.AddDbContext<AppIdentityDbContext>(x => 
-            {
-                x.UseSqlite(_config.GetConnectionString("IdentityConnection"));
-            });
+                x.UseMySql(_config.GetConnectionString("IdentityConnection"), 
+                    new MySqlServerVersion(new Version(8, 0, 23))));
 
             ConfigureServices(services);
         }
